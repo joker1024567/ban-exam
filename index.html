@@ -119,8 +119,9 @@
   <table>
     <thead><tr><th>层级</th><th>可用</th><th>备注</th></tr></thead>
     <tbody>
-      <tr><td>五选一 (HTTP 客户端)</td><td><code>httpx[http2]</code> / <code>aiohttp</code> / <code>urllib</code> / <code>http.client</code> / <code>pycurl</code></td><td>成品代码 T1-T33 全适用</td></tr>
-      <tr><td>两禁止 (限 header 排序题)</td><td><code>urllib3</code> + <code>requests</code></td><td>其余题型可用</td></tr>
+      <tr><td>五选一 (HTTP 客户端)</td><td><code>httpx[http2]</code> / <code>aiohttp</code> / <code>urllib</code> / <code>http.client</code> / <code>pycurl</code></td><td><b>限 header 排序题</b> · 仅 T1 受此限</td></tr>
+      <tr><td>两禁止 (限 header 排序题)</td><td><code>urllib3</code> + <code>requests</code></td><td><b>限 header 排序题</b> · 仅 T1 必禁</td></tr>
+      <tr><td colspan="3" style="color:var(--mut);font-size:12px">⚠️ 其余 3 考点（http2.0 / http2.0+TLS / jssm+set-cookie）工具栈自由，无五选一限制</td></tr>
       <tr><td>三出圈 (TLS 指纹)</td><td><code>curl_cffi</code> (最出) / <code>tls-client</code> / <code>primp</code></td><td>扩库问 AI</td></tr>
       <tr><td>h2 协议</td><td><code>httpx[http2]</code> (py) / <code>undici</code> (node)</td><td>非 h2 题不强制</td></tr>
       <tr><td>成品禁 (硬约束)</td><td><code>playwright</code></td><td>成品代码禁用，调试可用</td></tr>
