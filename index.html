@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>刷题禁题清单 · 4 道拒接 + 考点</title>
+<style>
+  :root { --bg:#0f1115; --card:#171a21; --line:#262b35; --txt:#e6e9ef; --mut:#8a93a6; --acc:#7aa2f7; --warn:#f7768e; --ok:#9ece6a; }
+  * { box-sizing: border-box }
+  body { margin:0; font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--txt); }
+  .wrap { max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+  h1 { font-size:24px; margin:0 0 4px; letter-spacing:.5px }
+  .sub { color:var(--mut); margin:0 0 28px; font-size:13px }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 18px 16px; transition:transform .15s,border-color .15s }
+  .card:hover { transform:translateY(-2px); border-color:#3a4252 }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px; margin-right:6px; font-weight:600 }
+  .t-ban { background:#3a1f25; color:var(--warn); border:1px solid #5a2c36 }
+  .t-site { background:#1f2a3a; color:var(--acc); border:1px solid #2c3a5a }
+  .name { font-size:17px; font-weight:600; margin:6px 0 4px }
+  .point { font-size:12px; color:var(--mut); margin-bottom:10px }
+  .reason { background:#0b0d11; border:1px solid var(--line); border-radius:6px; padding:10px 12px; font-size:13px; color:#cdd3df }
+  .reason b { color:var(--warn) }
+  .box { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:28px 0 16px }
+  .box h2 { margin:0 0 10px; font-size:16px; color:var(--acc) }
+  table { width:100%; border-collapse:collapse; font-size:13px }
+  th,td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line) }
+  th { color:var(--mut); font-weight:600; background:#11141a }
+  td code { background:#0b0d11; padding:1px 6px; border-radius:4px; font-size:12px; color:var(--ok) }
+  .footer { margin-top:40px; font-size:12px; color:var(--mut); text-align:center }
+  .footer code { color:var(--ok) }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🚫 刷题禁题清单</h1>
+<p class="sub">admin 2026-10-14 钦定 · 4 道拒接题 + 考点 · 部署到 GitHub Pages</p>
+
+<div class="grid">
+
+  <div class="card">
+    <span class="tag t-site">spiderdemo</span>
+    <span class="tag t-ban">禁题</span>
+    <div class="name">T1 header_check</div>
+    <div class="point">第 1 题 · 头部顺序校验</div>
+    <div class="reason">考点：<b>header 排序</b><br>
+    服务端按 header 字段原始顺序逐位校验，<code>requests</code> / <code>urllib3</code> 会自动重排 Header，必拒。<br>
+    ✅ 改用 <code>httpx</code> list-of-tuples 或 <code>http.client</code> raw bytes。</div>
+  </div>
+
+  <div class="card">
+    <span class="tag t-site">猿人学</span>
+    <span class="tag t-ban">禁题</span>
+    <div class="name">天杀的Http2.0</div>
+    <div class="point">match 系列 · HTTP/2 协议</div>
+    <div class="reason">考点：<b>http2.0</b><br>
+    站点强制 h2，<code>requests</code> 默认锁死 h1.1 直接 400。<br>
+    ✅ 改用 <code>httpx[http2]</code>（Python）或 <code>undici</code>（Node）。</div>
+  </div>
+
+  <div class="card">
+    <span class="tag t-site">猿人学</span>
+    <span class="tag t-ban">禁题</span>
+    <div class="name">乌拉乌拉乌拉</div>
+    <div class="point">match 系列 · 双考点叠加</div>
+    <div class="reason">考点：<b>http2.0 + TLS (JA3)</b><br>
+    h2 之外还验 TLS 指纹；普通 h2 客户端 JA3 与 Chrome 偏差大，被风控直接拦。<br>
+    ✅ <code>httpx[http2]</code> + <code>curl_cffi</code> impersonate=chrome120 出圈。</div>
+  </div>
+
+  <div class="card">
+    <span class="tag t-site">猿人学</span>
+    <span class="tag t-ban">禁题</span>
+    <div class="name">推心置腹</div>
+    <div class="point">match 系列 · 双考点叠加</div>
+    <div class="reason">考点：<b>jssm 请求 + header 排序</b><br>
+    请求 jssm 接口会下发 <code>Set-Cookie</code>，且服务端按 header 原始顺序校验。<br>
+    ✅ <code>httpx.Client(http2=True)</code> + cookie jar 自动接回，header 用 list-of-tuples。</div>
+  </div>
+
+</div>
+
+<div class="box">
+  <h2>🧰 4 考点 ↔ 解法 4 件套</h2>
+  <table>
+    <thead><tr><th>考点</th><th>触发题</th><th>解法</th><th>原因</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>header 排序</td>
+        <td>T1 / 推心置腹</td>
+        <td><code>httpx</code> list-of-tuples / <code>http.client</code> raw bytes</td>
+        <td><code>requests</code> / <code>urllib3</code> 会自动重排 Header</td>
+      </tr>
+      <tr>
+        <td>http2.0</td>
+        <td>天杀的Http2.0</td>
+        <td><code>httpx[http2]</code> / <code>undici</code></td>
+        <td><code>requests</code> 默认锁死 h1.1</td>
+      </tr>
+      <tr>
+        <td>TLS (JA3)</td>
+        <td>乌拉乌拉乌拉</td>
+        <td><code>curl_cffi</code> impersonate=chrome120</td>
+        <td>Python 默认客户端 JA3 偏差大</td>
+      </tr>
+      <tr>
+        <td>jssm + set-cookie</td>
+        <td>推心置腹</td>
+        <td><code>httpx.Client(http2=True)</code> + cookie jar</td>
+        <td>jssm 接口会下发 Set-Cookie 头</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="box">
+  <h2>📋 工具栈 (admin 10-14 升级版)</h2>
+  <table>
+    <thead><tr><th>层级</th><th>可用</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>五选一 (HTTP 客户端)</td><td><code>httpx[http2]</code> / <code>aiohttp</code> / <code>urllib</code> / <code>http.client</code> / <code>pycurl</code></td><td>成品代码 T1-T33 全适用</td></tr>
+      <tr><td>两禁止 (限 header 排序题)</td><td><code>urllib3</code> + <code>requests</code></td><td>其余题型可用</td></tr>
+      <tr><td>三出圈 (TLS 指纹)</td><td><code>curl_cffi</code> (最出) / <code>tls-client</code> / <code>primp</code></td><td>扩库问 AI</td></tr>
+      <tr><td>h2 协议</td><td><code>httpx[http2]</code> (py) / <code>undici</code> (node)</td><td>非 h2 题不强制</td></tr>
+      <tr><td>成品禁 (硬约束)</td><td><code>playwright</code></td><td>成品代码禁用，调试可用</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="footer">
+  源：<code>spiderdemo-yuanrenxue-skiplist</code> skill · 部署：GitHub Pages · 末更新 2026-10-14
+</p>
+
+</div>
+</body>
+</html>
