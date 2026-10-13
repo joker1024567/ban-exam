@@ -46,7 +46,7 @@
     <div class="point">第 1 题 · 头部顺序校验</div>
     <div class="reason">考点：<b>header 排序</b><br>
     服务端按 header 字段原始顺序逐位校验，<code>requests</code> / <code>urllib3</code> 会自动重排 Header，必拒。<br>
-    ✅ 改用 <code>httpx</code> list-of-tuples 或 <code>http.client</code> raw bytes。</div>
+    ✅ <code>httpx</code> / <code>aiohttp</code> / <code>urllib</code> / <code>http</code> / <code>pycurl</code></div>
   </div>
 
   <div class="card">
@@ -89,7 +89,7 @@
       <tr>
         <td>header 排序</td>
         <td>T1 / 推心置腹</td>
-        <td><code>httpx</code> list-of-tuples / <code>http.client</code> raw bytes</td>
+        <td><code>httpx</code> / <code>aiohttp</code> / <code>urllib</code> / <code>http</code> / <code>pycurl</code></td>
         <td><code>requests</code> / <code>urllib3</code> 会自动重排 Header</td>
       </tr>
       <tr>
@@ -119,7 +119,7 @@
   <table>
     <thead><tr><th>层级</th><th>可用</th><th>备注</th></tr></thead>
     <tbody>
-      <tr><td>五选一 (HTTP 客户端)</td><td><code>httpx[http2]</code> / <code>aiohttp</code> / <code>urllib</code> / <code>http.client</code> / <code>pycurl</code></td><td><b>限 header 排序题</b> · 仅 T1 受此限</td></tr>
+      <tr><td>五选一 (限 header 排序题)</td><td><code>httpx[http2]</code> / <code>aiohttp</code> / <code>urllib</code> / <code>http.client</code> / <code>pycurl</code></td><td><b>限 header 排序题</b> · 仅 T1 受此限</td></tr>
       <tr><td>两禁止 (限 header 排序题)</td><td><code>urllib3</code> + <code>requests</code></td><td><b>限 header 排序题</b> · 仅 T1 必禁</td></tr>
       <tr><td colspan="3" style="color:var(--mut);font-size:12px">⚠️ 其余 3 考点（http2.0 / http2.0+TLS / jssm+set-cookie）工具栈自由，无五选一限制</td></tr>
       <tr><td>三出圈 (TLS 指纹)</td><td><code>curl_cffi</code> (最出) / <code>tls-client</code> / <code>primp</code></td><td>扩库问 AI</td></tr>
