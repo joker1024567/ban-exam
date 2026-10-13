@@ -56,7 +56,7 @@
     <div class="point">match 系列 · HTTP/2 协议</div>
     <div class="reason">考点：<b>http2.0</b><br>
     站点强制 h2，<code>requests</code> 默认锁死 h1.1 直接 400。<br>
-    ✅ 改用 <code>httpx[http2]</code>（Python）或 <code>undici</code>（Node）。</div>
+    ✅ 改用 <code>httpx[http2]</code>（Python）。</div>
   </div>
 
   <div class="card">
@@ -95,7 +95,7 @@
       <tr>
         <td>http2.0</td>
         <td>天杀的Http2.0</td>
-        <td><code>httpx[http2]</code> / <code>undici</code></td>
+        <td><code>httpx[http2]</code></td>
         <td><code>requests</code> 默认锁死 h1.1</td>
       </tr>
       <tr>
@@ -123,7 +123,7 @@
       <tr><td>两禁止 (限 header 排序题)</td><td><code>urllib3</code> + <code>requests</code></td><td><b>限 header 排序题</b> · 仅 T1 必禁</td></tr>
       <tr><td colspan="3" style="color:var(--mut);font-size:12px">⚠️ 其余 3 考点（http2.0 / http2.0+TLS / jssm+set-cookie）工具栈自由，无五选一限制</td></tr>
       <tr><td>三出圈 (TLS 指纹)</td><td><code>curl_cffi</code> (最出) / <code>tls-client</code> / <code>primp</code></td><td>扩库问 AI</td></tr>
-      <tr><td>h2 协议</td><td><code>httpx[http2]</code> (py) / <code>undici</code> (node)</td><td>非 h2 题不强制</td></tr>
+      <tr><td>h2 协议</td><td><code>httpx[http2]</code></td><td>非 h2 题不强制</td></tr>
       <tr><td>成品禁 (硬约束)</td><td><code>playwright</code></td><td>成品代码禁用，调试可用</td></tr>
     </tbody>
   </table>
